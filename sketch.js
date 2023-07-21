@@ -40,7 +40,7 @@ function draw() {
         text("Press up to start game with 2 players", 100, 300)     
         text("Press down to start game with AI", 120, 350)
         textSize(15)
-        text("Player 1 Control: W,S              Player 2 Control: UP_Arrow, DOWN_Arrow", 90, 40)
+        text("Player 1 Control: W,S     Player 2 Control: Up Arrow, Down Arrow", 35, 40)
         text("By: Zhejie Jiang, Papa Kofi Insaidoo, Vishnu", 120, 450)          
 
         if (keyIsDown(UP_ARROW)) {

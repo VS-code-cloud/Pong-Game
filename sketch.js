@@ -9,10 +9,11 @@ let ball //The bouncing ball
 let ballYPos = 250;
 let gameState; //State 1, 2, 3
 let aiDifficulty;
+let powerUp;
 function setup() {
     createCanvas(500, 500);
-    player1 = new PongStick(30, 300, 6);
-    player2 = new PongStick(470, 300, 6);
+    player1 = new PongStick(30, 300, 6, 50);
+    player2 = new PongStick(470, 300, 6, 50);
     ball = new Ball(250, 250, Math.round(random(-4,4)), Math.round(random(-4,4)))
     if (ball.speedX ==0){
         ball.speedX = 3;
@@ -51,12 +52,19 @@ function draw() {
         }
         
     }
-   if (gameState == 1){fill(0, 0, 255);
-   rect(player2.x, player2.y, 2, 50);
+   if (gameState == 1){
+    fill(0, 0, 255);
+   rect(player2.x, player2.y, 2, player2.size);
 
    fill(255, 0, 0);
-   rect(player1.x, player1.y, 2, 50);
-    fill(255,255,255); 
+   rect(player1.x, player1.y, 2, player1.size);
+   if (powerUp==5){
+        fill(255,0,0);
+   } else if (powerUp==4){
+        fill(0,255,0);
+   } else {
+        fill(255,255,255);
+   }
     circle(ball.x, ball.y, 15)
 
     //Player 1 movement
@@ -78,7 +86,6 @@ function draw() {
    textSize(10);
 
    
-   console.log('ball', ball)
    ball.x+=ball.speedX;
    ball.y+=ball.speedY;
    if (ball.y>=485 || ball.y<=15) {
@@ -114,6 +121,11 @@ function draw() {
         ball.speedY=3;
     }
     score++;
+    powerUp=0;
+    player1.speed = 6
+    player1.size=50;
+    player2.size=50;
+    player2.speed = 6;
    }
    //Player 2 gets point
    if (ball.x<15) {
@@ -128,6 +140,11 @@ function draw() {
         ball.speedY=3;
     }
     enemyScore++;
+    powerUp=0;
+    player1.speed = 6
+    player1.size=50;
+    player2.size=50;
+    player2.speed = 6;
    }
 
     //Ball hits Player2 hit detection 
@@ -137,6 +154,12 @@ function draw() {
         ball.speedX *= -1;
         (ball.speedX<0) ? ball.speedX -=random(0,0.5) : ball.speedX += random(0,0.5);
         (ball.speedY<0) ? ball.speedY -=random(0,0.5) : ball.speedY += random(0,0.5);
+        if (powerUp == 5) {
+            player2.speed +=1;
+        } else if (powerUp ==4) {
+            player2.size +=10;
+        }
+        powerUp = Math.round(random(0,19));
     }
 
     //Ball hits Player1 hit detection 
@@ -146,6 +169,13 @@ function draw() {
          ball.speedX *= -1;
          (ball.speedX<0) ? ball.speedX -=random(0,0.5) : ball.speedX += random(0,0.5);
          (ball.speedY<0) ? ball.speedY -=random(0,0.5) : ball.speedY += random(0,0.5);
+         if (powerUp == 5) {
+            player1.speed +=1;
+        } else if (powerUp ==4) {
+            player1.size +=10;
+        }
+         powerUp = Math.round(random(0,19));
+
      }            
  
    fill(255,255,255)
@@ -168,11 +198,17 @@ function draw() {
     if (gameState ==3) {
         player2.speed =aiDifficulty;
         fill(0, 0, 255);
-   rect(player2.x, player2.y, 2, 50);
+   rect(player2.x, player2.y, 2, player2.size);
 
    fill(255, 0, 0);
-   rect(player1.x, player1.y, 2, 50);
-    fill(255,255,255); 
+   rect(player1.x, player1.y, 2, player1.size);
+   if (powerUp==5){
+    fill(255,0,0);
+} else if (powerUp==4){
+    fill(0,255,0);
+} else {
+    fill(255,255,255);
+}
     circle(ball.x, ball.y, 15)
 
     //Player 1 movement
@@ -191,7 +227,6 @@ function draw() {
    textSize(10);
 
    
-   console.log('ball', ball)
    ball.x+=ball.speedX;
    ball.y+=ball.speedY;
    if (ball.y>=485 || ball.y<=15) {
@@ -227,6 +262,11 @@ function draw() {
         ball.speedY=3;
     }
     score++;
+    powerUp=0
+    player1.speed = 6
+    player1.size=50;
+    player2.size=50;
+    player2.speed = aiDifficulty;
    }
    //Player 2 gets point
    if (ball.x<15) {
@@ -241,6 +281,11 @@ function draw() {
         ball.speedY=3;
     }
     enemyScore++;
+    powerUp=0;
+    player1.speed = 6
+    player1.size=50;
+    player2.size=50;
+    player2.speed = aiDifficulty;
    }
 
     //Ball hits Player2 hit detection 
@@ -248,8 +293,15 @@ function draw() {
    }
    else {
         ball.speedX *= -1;
-        (ball.speedX<0) ? ball.speedX -=random(0,0.5) : ball.speedX += random(0,0.5);
-        (ball.speedY<0) ? ball.speedY -=random(0,0.5) : ball.speedY += random(0,0.5);
+        (ball.speedX<0) ? ball.speedX-=random(0,0.5) : ball.speedX += random(0,0.5);
+        (ball.speedY<0) ? ball.speedY-=random(0,0.5) : ball.speedY += random(0,0.5);
+        if (powerUp == 5) {
+            player2.speed +=1;
+        } else if (powerUp == 4) {
+            player2.size +=10;
+        }
+        powerUp = Math.round(random(0,19));
+
     }
 
     //Ball hits Player1 hit detection 
@@ -259,6 +311,13 @@ function draw() {
          ball.speedX *= -1;
          (ball.speedX<0) ? ball.speedX -=random(0,0.5) : ball.speedX += random(0,0.5);
          (ball.speedY<0) ? ball.speedY -=random(0,0.5) : ball.speedY += random(0,0.5);
+         if (powerUp == 5) {
+            player1.speed +=1;
+        } else if (powerUp ==4) {
+            player1.size +=10;
+        }
+         powerUp = Math.round(random(0,19));
+
      }            
  
    fill(255,255,255)
@@ -301,10 +360,11 @@ function draw() {
 
 //PongStick Class
 class PongStick {
-    constructor(x,y,speed) {
+    constructor(x,y,speed, size) {
         this.x = x;
         this.y = y;
         this.speed = speed;
+        this.size = size;
     }
 }
 //Ball Class

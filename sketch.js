@@ -40,8 +40,8 @@ function draw() {
         text("Press up to start game with 2 players", 100, 300)     
         text("Press down to start game with AI", 120, 350)
         textSize(15)
-        text("Player 1 Control: W,S     Player 2 Control: Up Arrow, Down Arrow", 35, 40)
-        text("By: Zhejie Jiang, Papa Kofi Insaidoo, Vishnu", 120, 450)          
+        text("Player 1 Control: W, S     Player 2 Control: Up Arrow, Down Arrow", 35, 40)
+        text("By: Vishnu Sharma, Zhejie Jiang, Papa Kofi Insaidoo", 120, 450)          
 
         if (keyIsDown(UP_ARROW)) {
             gameState =1;
@@ -52,10 +52,10 @@ function draw() {
         
     }
    if (gameState == 1){fill(0, 0, 255);
-   rect(player2.x, player2.y, 5, 50);
+   rect(player2.x, player2.y, 2, 50);
 
    fill(255, 0, 0);
-   rect(player1.x, player1.y, 5, 50);
+   rect(player1.x, player1.y, 2, 50);
     fill(255,255,255); 
     circle(ball.x, ball.y, 15)
 
@@ -168,10 +168,10 @@ function draw() {
     if (gameState ==3) {
         player2.speed =aiDifficulty;
         fill(0, 0, 255);
-   rect(player2.x, player2.y, 5, 50);
+   rect(player2.x, player2.y, 2, 50);
 
    fill(255, 0, 0);
-   rect(player1.x, player1.y, 5, 50);
+   rect(player1.x, player1.y, 2, 50);
     fill(255,255,255); 
     circle(ball.x, ball.y, 15)
 
@@ -279,7 +279,7 @@ function draw() {
         text("Press up for Easy AI", 160, 300)     
         text("Press left for Medium AI", 145, 350)
         text("Press right for Hard AI", 155, 400)
-
+        text("Press w for Extreme  AI", 145, 450)
         if (keyIsDown(UP_ARROW)) {
             gameState = 3;
             aiDifficulty = 3;
@@ -291,6 +291,10 @@ function draw() {
         if (keyIsDown(RIGHT_ARROW)) {
             gameState = 3;
             aiDifficulty =8;
+        }
+        if (keyIsDown(87)){
+            gameState = 3;
+            aiDifficulty = 10;
         }
     }
 }
